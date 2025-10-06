@@ -27,14 +27,14 @@
     <section class="featured-products">
         <div class="container">
             <h2 class="featured-products__title">Featured Products</h2>
-            <p>{{ $products }}</p>
             <div class="featured-products__grid">
                 @forelse($products->take(8) as $product)
                     <div class="product-card">
                         <a href="{{ route('products.show', $product->id) }}" class="product-card__link">
                             <div class="product-card__image-container">
                                 @if (!empty($product->image))
-                                    <img src="{{ asset($product->image) }}" loading="lazy" alt="{{ $product->name }}" class="product-card__image">
+                                    <img src="{{ asset($product->image) }}" loading="lazy" alt="{{ $product->name }}"
+                                        class="product-card__image">
                                 @else
                                     <div class="product-card__no-image">No Image</div>
                                 @endif
