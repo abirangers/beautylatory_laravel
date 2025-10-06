@@ -13,8 +13,13 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        $sliders = Slider::orderBy('order', 'asc')->get();
-        $products = Product::with('category')->orderBy('created_at', 'desc')->limit(8)->get();
+        $sliders = cache()->remember('home_sliders', 3600, function () {
+            return Slider::orderBy('order', 'asc')->get();
+        });
+
+        $products = cache()->remember('home_products', 3600, function () {
+            return Product::with('category')->orderBy('created_at', 'desc')->limit(8)->get();
+        });
 
         return view('home.index', compact('sliders', 'products'));
     }

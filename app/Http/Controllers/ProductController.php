@@ -65,7 +65,9 @@ class ProductController extends Controller
      */
     public function show(string $id): View
     {
-        $product = Product::with('category')->findOrFail($id);
+        $product = cache()->remember("product_{$id}", 3600, function () use ($id) {
+            return Product::with('category')->findOrFail($id);
+        });
         return view('products.show', compact('product'));
     }
 
@@ -129,15 +131,23 @@ class ProductController extends Controller
 
     public function guestIndex(Request $request)
     {
-        $query = Product::with('category')->orderBy('created_at', 'desc');
+        // Cache categories since they don't change often
+        $categories = cache()->remember('all_categories', 3600, function () {
+            return Category::orderBy('name', 'asc')->get();
+        });
 
-        // Filter by category if specified
-        if ($request->has('category') && !empty($request->category)) {
-            $query->where('category_id', $request->category);
-        }
+        // Apply filters and get products with caching
+        $cacheKey = 'products_' . ($request->category ?: 'all') . '_' . $request->page;
+        $products = cache()->remember($cacheKey, 600, function () use ($request) {
+            $query = Product::with('category')->orderBy('created_at', 'desc');
 
-        $products = $query->get();
-        $categories = Category::orderBy('name', 'asc')->get();
+            // Filter by category if specified
+            if ($request->has('category') && !empty($request->category)) {
+                $query->where('category_id', $request->category);
+            }
+
+            return $query->get();
+        });
 
         return view('products.index', compact('products', 'categories'));
     }

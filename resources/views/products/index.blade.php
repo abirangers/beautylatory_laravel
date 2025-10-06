@@ -14,10 +14,11 @@
         <section class="category-filter-section">
             <div class="container">
                 <div class="category-filter-buttons">
-                    <a href="{{ route('products.index') }}" class="category-btn {{ request()->get('category') ? '' : 'active' }}">All Products</a>
-                    @foreach($categories as $category)
+                    <a href="{{ route('products.index') }}"
+                        class="category-btn {{ request()->get('category') ? '' : 'active' }}">All Products</a>
+                    @foreach ($categories as $category)
                         <a href="{{ route('products.index', ['category' => $category->id]) }}"
-                           class="category-btn {{ request()->get('category') == $category->id ? 'active' : '' }}">
+                            class="category-btn {{ request()->get('category') == $category->id ? 'active' : '' }}">
                             {{ $category->name }}
                         </a>
                     @endforeach
@@ -33,8 +34,12 @@
                             <a href="{{ route('products.show', $product->id) }}" class="product-card__link">
                                 <div class="product-card__image-container">
                                     @if (!empty($product->image))
-                                        <img src="{{ asset($product->image) }}" alt="{{ $product->name }}"
-                                            class="product-card__image">
+                                        <img src="{{ asset($product->image) }}"
+                                            srcset="{{ asset(str_replace('.', '-268w.', $product->image)) }} 268w,
+                                                      {{ asset(str_replace('.', '-380w.', $product->image)) }} 380w,
+                                                      {{ asset(str_replace('.', '-512w.', $product->image)) }} 512w"
+                                            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                            alt="{{ $product->name }}" class="product-card__image">
                                     @else
                                         <div class="product-card__no-image">No Image</div>
                                     @endif

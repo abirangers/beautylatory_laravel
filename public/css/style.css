@@ -254,10 +254,11 @@ button.nav-link {
     text-overflow: ellipsis;
 }
 
-.product-card__price {
-    font-size: 1.2rem;
+.product-detail__price {
+    font-size: 2rem;
     font-weight: bold;
-    color: var(--primary-color);
+    color: #1f355e; /* Using the text-color variable value for better contrast */
+    margin-bottom: 1.5rem;
 }
 
 /*

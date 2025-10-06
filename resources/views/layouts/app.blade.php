@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'BeautyLatory')</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="preload" href="{{ asset('css/style.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    </noscript>
     @yield('styles')
     <style>
         .nav-container {
@@ -30,8 +33,8 @@
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <a href="{{ url('/') }}"><img src="{{ asset('images/asset-logo.png') }}" alt="logo"
-                            width="68"></a>
+                    <a href="{{ url('/') }}"><img src="{{ asset('images/asset-logo.png') }}"
+                            alt="BeautyLatory Logo" width="68" height="30" loading="eager"></a>
                 </div>
                 <ul class="nav-menu">
                     <li class="nav-item">
@@ -71,7 +74,7 @@
         </div>
     </footer>
 
-    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}" defer></script>
     @yield('scripts')
 </body>
 
