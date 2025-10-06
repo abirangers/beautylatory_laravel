@@ -35,11 +35,9 @@
                                 <div class="product-card__image-container">
                                     @if (!empty($product->image))
                                         <img src="{{ asset($product->image) }}"
-                                            srcset="{{ asset(str_replace('.', '-268w.', $product->image)) }} 268w,
-                                                      {{ asset(str_replace('.', '-380w.', $product->image)) }} 380w,
-                                                      {{ asset(str_replace('.', '-512w.', $product->image)) }} 512w"
-                                            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                            alt="{{ $product->name }}" class="product-card__image">
+                                             loading="lazy"
+                                             alt="{{ $product->name }}"
+                                             class="product-card__image">
                                     @else
                                         <div class="product-card__no-image">No Image</div>
                                     @endif

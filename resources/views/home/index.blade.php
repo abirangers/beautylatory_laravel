@@ -8,11 +8,7 @@
             @if (!empty($sliders))
                 @foreach ($sliders as $index => $slider)
                     <div class="hero__slide {{ $index === 0 ? 'hero__slide--active' : '' }}">
-                        <img src="{{ asset($slider->image) }}"
-                            srcset="{{ asset(str_replace('.', '-320w.', $slider->image)) }} 320w,
-                                      {{ asset(str_replace('.', '-640w.', $slider->image)) }} 640w,
-                                      {{ asset(str_replace('.', '-1024w.', $slider->image)) }} 1024w"
-                            sizes="(max-width: 768px) 100vw, 1024px" alt="Slider image" class="hero__image">
+                        <img src="{{ asset($slider->image) }}" loading="lazy" alt="Slider image" class="hero__image">
                     </div>
                 @endforeach
             @else
@@ -31,18 +27,14 @@
     <section class="featured-products">
         <div class="container">
             <h2 class="featured-products__title">Featured Products</h2>
+            <p>{{ $products }}</p>
             <div class="featured-products__grid">
                 @forelse($products->take(8) as $product)
                     <div class="product-card">
                         <a href="{{ route('products.show', $product->id) }}" class="product-card__link">
                             <div class="product-card__image-container">
                                 @if (!empty($product->image))
-                                    <img src="{{ asset($product->image) }}"
-                                        srcset="{{ asset(str_replace('.', '-268w.', $product->image)) }} 268w,
-                                              {{ asset(str_replace('.', '-380w.', $product->image)) }} 380w,
-                                              {{ asset(str_replace('.', '-512w.', $product->image)) }} 512w"
-                                        sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                        alt="{{ $product->name }}" class="product-card__image">
+                                    <img src="{{ asset($product->image) }}" loading="lazy" alt="{{ $product->name }}" class="product-card__image">
                                 @else
                                     <div class="product-card__no-image">No Image</div>
                                 @endif
