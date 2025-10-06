@@ -8,12 +8,12 @@
             @if (!empty($sliders))
                 @foreach ($sliders as $index => $slider)
                     <div class="hero__slide {{ $index === 0 ? 'hero__slide--active' : '' }}">
-                        <img src="{{ asset($slider->image) }}" loading="lazy" alt="Slider image" class="hero__image">
+                        <img src="{{ asset($slider->image) }}" loading="lazy" alt="Slider image" class="hero__image" width="1024" height="576">
                     </div>
                 @endforeach
             @else
                 <div class="hero__slide hero__slide--active">
-                    <img src="{{ asset('images/default-slider.jpg') }}" alt="Welcome to BeautyLatory" class="hero__image">
+                    <img src="{{ asset('images/default-slider.jpg') }}" alt="Welcome to BeautyLatory" class="hero__image" width="1024" height="576">
                 </div>
             @endif
         </div>
@@ -27,14 +27,14 @@
     <section class="featured-products">
         <div class="container">
             <h2 class="featured-products__title">Featured Products</h2>
-            <p>{{ $products }}</p>
             <div class="featured-products__grid">
                 @forelse($products->take(8) as $product)
                     <div class="product-card">
                         <a href="{{ route('products.show', $product->id) }}" class="product-card__link">
                             <div class="product-card__image-container">
                                 @if (!empty($product->image))
-                                    <img src="{{ asset($product->image) }}" loading="lazy" alt="{{ $product->name }}" class="product-card__image">
+                                    <img src="{{ asset($product->image) }}" loading="lazy" alt="{{ $product->name }}"
+                                        class="product-card__image" width="380" height="380">
                                 @else
                                     <div class="product-card__no-image">No Image</div>
                                 @endif

@@ -37,7 +37,8 @@
                                         <img src="{{ asset($product->image) }}"
                                              loading="lazy"
                                              alt="{{ $product->name }}"
-                                             class="product-card__image">
+                                             class="product-card__image"
+                                             width="380" height="380">
                                     @else
                                         <div class="product-card__no-image">No Image</div>
                                     @endif

@@ -11,7 +11,7 @@
                     @if (!empty($product->image))
                         <img src="{{ asset($product->image) }}"
                              loading="lazy"
-                             alt="{{ $product->name }}" class="product-detail__image">
+                             alt="{{ $product->name }}" class="product-detail__image" width="500" height="500">
                     @else
                         <div class="product-detail__no-image">
                             <span>No Image Available</span>
